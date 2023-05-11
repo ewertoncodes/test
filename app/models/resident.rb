@@ -9,5 +9,5 @@ class Resident < ApplicationRecord
   validates :phone, presence: true, phone: true
   validates :photo, presence: true
   enum status: [:inactive, :active]
-  validates :status, inclusion: { in: [:inactive, :active] }
+  validates :status, inclusion: { in: Resident.statuses.keys }
 end

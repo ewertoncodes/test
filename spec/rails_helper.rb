@@ -69,4 +69,10 @@ RSpec.configure do |config|
   end
 
   config.include ActiveStorageValidations::Matchers
+
+  require 'capybara/rails'
+  require 'selenium-webdriver'
+
+  Capybara.javascript_driver = :selenium_chrome
+  Capybara.default_max_wait_time = 5
 end
