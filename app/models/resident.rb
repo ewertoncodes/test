@@ -1,5 +1,8 @@
 class Resident < ApplicationRecord
+  has_one :address
   has_one_attached :photo
+
+  accepts_nested_attributes_for :address
 
   validates :full_name, presence: true
   validates :cpf, presence: true, uniqueness: true, cpf: true

@@ -13,6 +13,7 @@ class ResidentsController < ApplicationController
   # GET /residents/new
   def new
     @resident = Resident.new
+    @resident.build_address
   end
 
   # GET /residents/1/edit
@@ -65,6 +66,24 @@ class ResidentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def resident_params
-      params.require(:resident).permit(:full_name, :cpf, :cns, :email, :birth_date, :phone, :photo, :status)
+      params.require(:resident).permit(
+        :full_name,
+        :cpf,
+        :cns,
+        :email,
+        :birth_date,
+        :phone,
+        :photo,
+        :status,
+        address_attributes: [
+          :zip_code,
+          :street,
+          :complement,
+          :neighborhood,
+          :city,
+          :state,
+          :ibge_code
+        ]
+      )
     end    
 end

@@ -1,6 +1,6 @@
-<h1>New resident</h1>
+<h1>New 1 resident</h1>
 
-<%= form_with model: @resident, url: residents_path do |form| %>
+<%= form_for @resident do |form| %>
   <% if @resident.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@resident.errors.count, "error") %> prohibited this resident from being saved:</h2>
@@ -35,7 +35,7 @@
 
   <div class="field">
     <%= form.label :birth_date %>
-    <%= form.date_field :birth_date %>
+    <%= form.date_field :birth_date, max: Date.today.strftime('%Y-%m-%d') %>
   </div>
 
   <div class="field">
@@ -53,6 +53,29 @@
     <%= form.select :status, options_for_select(Resident.statuses.keys.to_a) %>
   </div>
 
+  <%= form.fields_for :address do |address_form| %>
+    <%= address_form.label :zip_code %>
+    <%= address_form.text_field :zip_code %>
+
+    <%= address_form.label :street %>
+    <%= address_form.text_field :street %>
+
+    <%= address_form.label :complement %>
+    <%= address_form.text_field :complement %>
+
+    <%= address_form.label :neighborhood %>
+    <%= address_form.text_field :neighborhood %>
+
+    <%= address_form.label :city %>
+    <%= address_form.text_field :city %>
+
+    <%= address_form.label :state %>
+    <%= address_form.text_field :state %>
+
+    <%= address_form.label :ibge_code %>
+    <%= address_form.text_field :ibge_code %>
+    
+  <% end %>  
   <div class="actions">
     <%= form.submit %>
   </div>
