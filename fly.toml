@@ -17,3 +17,7 @@ console_command = "/rails/bin/rails console"
 [[statics]]
   guest_path = "/usr/ewerton/public"
   url_prefix = "/"
+
+[mounts]
+source="municipe_test"
+destination="/data"
