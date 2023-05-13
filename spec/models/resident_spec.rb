@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Resident, type: :model do
@@ -27,10 +29,9 @@ RSpec.describe Resident, type: :model do
     it { is_expected.to_not allow_value(2000.years.ago).for(:birth_date) }
 
     it { is_expected.to validate_presence_of(:phone) }
-    it { is_expected.to allow_value('1191234-5678').for(:phone) }
-    
+    it { is_expected.to allow_value(ENV['PHONE_NUMBER']).for(:phone) }
+
     it { is_expected.to validate_presence_of(:photo) }
     it { is_expected.to define_enum_for(:status).with_values(inactive: 0, active: 1) }
   end
 end
-

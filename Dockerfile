@@ -3,6 +3,8 @@ FROM ruby:3.2.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 WORKDIR /usr/ewerton
 COPY . /usr/ewerton
+RUN gem install bundler
+
 RUN bundle install
 
 COPY entrypoint.sh /usr/bin/
