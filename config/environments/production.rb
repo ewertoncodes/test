@@ -95,20 +95,16 @@ Rails.application.configure do
 
   # Phonelib settings
   Phonelib.default_country = ['BR']
-
-
-
+  
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: ENV['MAILGUN_SMTP_SERVER'],
-    port: ENV['MAILGUN_SMTP_PORT'],
-    user_name: ENV['MAILGUN_SMTP_LOGIN'],
-    password: ENV['MAILGUN_API_KEY'],
-    domain: ENV['MAILGUN_DOMAIN'],
-    authentication: :plain,
-    enable_starttls_auto: true
+    :port           => MAILGUN_SMTP_PORT,
+    :address        => MAILGUN_SMTP_SERVER,
+    :user_name      => MAILGUN_SMTP_LOGIN,
+    :password       => MAILGUN_SMTP_PASSWORD,
+    :domain         => MAILGUN_DOMAIN,
+    :authentication => :plain,
+    :enable_starttls_auto => true
   }
   
-config.action_mailer.default_url_options = { host: 'https://nameless-reef-20987.herokuapp.com/', protocol: 'https' }
-
 end
