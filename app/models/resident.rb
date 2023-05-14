@@ -16,6 +16,9 @@ class Resident < ApplicationRecord
   enum status: %i[inactive active]
   validates :status, inclusion: { in: Resident.statuses.keys }
 
+  include PgSearch::Model
+  pg_search_scope :search_by_full_name, against: [:full_name]
+
   def notify
     ResidentMailer.notify(self).deliver_now
   end

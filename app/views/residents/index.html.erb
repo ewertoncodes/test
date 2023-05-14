@@ -1,4 +1,9 @@
 <h1>Residentes</h1>
+<%= form_tag residents_path, method: :get do %>
+  <%= text_field_tag :query, params[:query], placeholder: "Search residents by full name" %>
+  <%= submit_tag "Search" %>
+<% end %>
+
 
 <table>
   <thead>
@@ -25,7 +30,7 @@
         <td><%= resident.cpf %></td>
         <td><%= resident.cns %></td>
         <td><%= resident.email %></td>
-        <td><%= resident.birth_date.strftime("%d/%m/%Y") %></td>
+        <td><%= resident.birth_date&.strftime("%d/%m/%Y") %></td>
         <td><%= resident.phone %></td>
         <td>
           <% if resident.photo.attached? %>

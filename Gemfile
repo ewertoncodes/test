@@ -41,6 +41,7 @@ gem 'simplecov', require: false, group: :test
 gem 'twilio-ruby'
 gem 'twilio-test-toolkit'
 gem 'dockerfile-rails'
+gem 'pg_search'
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem

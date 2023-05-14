@@ -5,7 +5,11 @@ class ResidentsController < ApplicationController
 
   # GET /residents or /residents.json
   def index
-    @residents = Resident.includes(:address).all
+    if params[:query].present?
+      @residents = Resident.search_by_full_name(params[:query])
+    else
+      @residents = Resident.includes(:address).all
+    end
   end
 
   # GET /residents/1 or /residents/1.json
