@@ -30,7 +30,7 @@ class ResidentsController < ApplicationController
 
     respond_to do |format|
       if @resident.save
-        ResidentMailer.notify(@resident).deliver_now
+        ResidentMailer.notify(@resident).deliver_later
         TwilioClient.new.send_text(@resident, 'Você foi cadastrado no sistema!')
 
         format.html { redirect_to resident_url(@resident), notice: 'Resident was successfully created.' }
@@ -45,12 +45,13 @@ class ResidentsController < ApplicationController
   def update_status
     @resident = Resident.find(params[:id])
     if @resident.update(resident_params)
+      ResidentMailer.notify_status(@resident).deliver_later
       redirect_to residents_path, notice: 'Status atualizado com sucesso.'
     else
       redirect_to residents_path, alert: 'Falha ao atualizar o status.'
     end
   end
-  
+
   # PATCH/PUT /residents/1 or /residents/1.json
   def update
     respond_to do |format|

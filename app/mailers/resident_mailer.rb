@@ -6,6 +6,12 @@ class ResidentMailer < ApplicationMailer
   def notify(resident)
     @full_name = resident.full_name
 
-    mail to: resident.email, subject: 'resident'
+    mail to: resident.email, subject: 'cadastro'
+  end
+
+  def notify_status(resident)
+    @status= resident.full_status
+
+    mail to: resident.email, subject: 'cadastro'
   end
 end
