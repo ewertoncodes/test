@@ -96,14 +96,14 @@ Rails.application.configure do
   # Phonelib settings
   Phonelib.default_country = ['BR']
   
+  config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    address: 'smtp.gmail.com',
-    port: 587,
-    domain: 'gmail.com',
-    user_name: ENV['GMAIL_USER_NAME'],
-    password: ENV['GMAIL_PASSWORD'],
-    authentication: 'plain',
-    enable_starttls_auto: true
+    :authentication => :plain,
+    :address => "smtp.mailgun.org",
+    :port => 587,
+    :domain => ENV['MAILGUN_USER_NAME'],
+    :user_name => ENV['MAILGUN_USER_NAME'],
+    :password => ENV['MAILGUN_PASSWORD']
   }
   
 end
