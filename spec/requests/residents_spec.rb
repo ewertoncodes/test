@@ -17,6 +17,12 @@ RSpec.describe 'Residents', type: :request do
         end.to change(Resident, :count).by(1)
       end
 
+      it 'notify an email' do
+        expect do
+          post residents_url, params: { resident: resident_params }
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+
       it 'redirects to the created resident' do
         post residents_url, params: { resident: resident_params }
         expect(response).to redirect_to(Resident.last)
@@ -70,6 +76,12 @@ RSpec.describe 'Residents', type: :request do
         patch "/residents/#{resident.id}/update_status", params: { id: resident.id, resident: { status: 'inactive' } }
         resident.reload
         expect(resident.status).to eq('inactive')
+      end
+
+      it 'notify an email' do
+        expect do
+          patch "/residents/#{resident.id}/update_status", params: { id: resident.id, resident: { status: 'inactive' } }
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
       end
 
       it 'redirects to residents index' do
