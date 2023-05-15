@@ -14,6 +14,7 @@
       <th>Email</th>
       <th>Data de nascimento</th>
       <th>Celular</th>
+      <th>Status</th>
       <th>Foto</th>
       <th>CEP</th>
       <th>Rua</th>
@@ -32,6 +33,12 @@
         <td><%= resident.email %></td>
         <td><%= resident.birth_date&.strftime("%d/%m/%Y") %></td>
         <td><%= resident.phone %></td>
+        <td>
+        <%= form_with model: resident, url: update_status_resident_path(resident), method: :patch do |f| %>
+          <%= f.select :status, options_for_select(["active", "inactive"], resident.status), class: "status-select" %>
+          <%= f.submit "Atualizar", class: "update-status-button" %>
+        <% end %>
+      </td>
         <td>
           <% if resident.photo.attached? %>
             <%= image_tag(resident.photo, style: "height:50px") %>

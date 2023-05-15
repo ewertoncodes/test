@@ -2,7 +2,11 @@
 
 Rails.application.routes.draw do
   root 'residents#new'
-  resources :residents
+  resources :residents do
+    member do
+      patch 'update_status'
+    end
+  end
   resources :search, only: [:index]
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html

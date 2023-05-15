@@ -42,6 +42,15 @@ class ResidentsController < ApplicationController
     end
   end
 
+  def update_status
+    @resident = Resident.find(params[:id])
+    if @resident.update(resident_params)
+      redirect_to residents_path, notice: 'Status atualizado com sucesso.'
+    else
+      redirect_to residents_path, alert: 'Falha ao atualizar o status.'
+    end
+  end
+  
   # PATCH/PUT /residents/1 or /residents/1.json
   def update
     respond_to do |format|

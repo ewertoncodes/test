@@ -13,3 +13,14 @@
  *= require_tree .
  *= require_self
  */
+ .status-select {
+  width: 100px;
+}
+
+.update-status-button {
+  padding: 5px 10px;
+  background-color: #337ab7;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}

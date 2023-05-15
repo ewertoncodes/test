@@ -55,11 +55,27 @@ RSpec.describe 'Residents', type: :request do
 
     context 'with invalid parameters' do
       it 'does not update the resident' do
-        patch "/residents/#{resident.id}", params: { id: resident.id, resident: invalid_attributes }
-        resident.reload
-        expect(resident.full_name).not_to eq('')
-        expect(resident.email).not_to eq('joao')
+        expect {
+          patch "/residents/#{resident.id}/update_status", params: { id: resident.id, resident: invalid_attributes }
+        }.to_not change { resident.reload.full_name }
       end
     end
+  end
+
+  describe 'PATCH #update_status' do
+    let(:resident) { create(:resident) }
+
+    context 'with valid parameters' do
+      it 'updates the resident status' do
+        patch "/residents/#{resident.id}/update_status", params: { id: resident.id, resident: { status: 'inactive' } }
+        resident.reload
+        expect(resident.status).to eq('inactive')
+      end
+
+      it 'redirects to residents index' do
+        patch "/residents/#{resident.id}/update_status", params: { id: resident.id, resident: { status: 'inactive' } }
+        expect(response).to redirect_to(residents_path)
+      end
+    end    
   end
 end
