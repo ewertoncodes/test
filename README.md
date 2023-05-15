@@ -1,7 +1,7 @@
 ```bash
 git clone git@github.com:ewertoncodes/test.git
 cd test
-touch .env
+cp .env.sample .env
 docker compose run web rails db:setup
 docker compose up
 ```
