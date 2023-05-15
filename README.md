@@ -11,3 +11,7 @@ If you want see tests:
 ```bash
 docker compose run web rspec
 ```
+
+You can see the app live on:
+
+https://stark-tor-07530.herokuapp.com/
