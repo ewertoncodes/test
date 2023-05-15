@@ -10,7 +10,7 @@ class ResidentMailer < ApplicationMailer
   end
 
   def notify_status(resident)
-    @status= resident.full_status
+    @status= resident.status
 
     mail to: resident.email, subject: 'cadastro'
   end
