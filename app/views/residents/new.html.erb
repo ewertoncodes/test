@@ -40,8 +40,8 @@
 
   <div class="field">
     <%= form.label :phone %>
-    <%= form.text_field :phone %>
-  </div>
+    <%= form.text_field :phone, data: {target: "hello.phone"}, action: "input->hello#mask" %>
+    </div>
 
   <div class="field">
     <%= form.label :photo %>
@@ -53,27 +53,28 @@
     <%= form.select :status, options_for_select(Resident.statuses.keys.to_a) %>
   </div>
 
+  <div data-controller="hello">
   <%= form.fields_for :address do |address_form| %>
-    <%= address_form.label :zip_code %>
-    <%= address_form.text_field :zip_code %>
-
-    <%= address_form.label :street %>
-    <%= address_form.text_field :street %>
-
+    <%= address_form.label :zip_code %> 
+    <%= address_form.text_field :zip_code, data: { controller:'hello', action: 'input->hello#lookup', target:'zipcode' } %>
+    <%= address_form.label :street  %>
+    <%= address_form.text_field :street, data: {target: "hello.street"} %>
+    
     <%= address_form.label :complement %>
-    <%= address_form.text_field :complement %>
-
+    <%= address_form.text_field :complement, data: {target: "hello.complement"} %>
+    
     <%= address_form.label :neighborhood %>
-    <%= address_form.text_field :neighborhood %>
-
+    <%= address_form.text_field :neighborhood, data: {target: "hello.neighborhood"} %>
+    
     <%= address_form.label :city %>
-    <%= address_form.text_field :city %>
-
+    <%= address_form.text_field :city, data: {target: "hello.city"} %>
+    
     <%= address_form.label :state %>
-    <%= address_form.text_field :state %>
-
+    <%= address_form.text_field :state, data: {target: "hello.state"} %>
+    
     <%= address_form.label :ibge_code %>
-    <%= address_form.text_field :ibge_code %>
+    <%= address_form.text_field :ibge_code, data: {target: "hello.ibge_code"} %>
+    </div>
     
   <% end %>  
   <div class="actions">
