@@ -19,8 +19,4 @@ class Resident < ApplicationRecord
 
   include PgSearch::Model
   pg_search_scope :search_by_full_name, against: [:full_name]
-
-  def notify
-    ResidentMailer.notify(self).deliver_later
-  end
 end
