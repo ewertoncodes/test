@@ -45,7 +45,7 @@ class ResidentsController < ApplicationController
   # PATCH/PUT /residents/1 or /residents/1.json
   def update
     respond_to do |format|
-      if @resident.update(resident_params)
+      if @resident.update!(resident_params)
         format.html { redirect_to resident_url(@resident), notice: 'Resident was successfully updated.' }
         format.json { render :show, status: :ok, location: @resident }
       else
